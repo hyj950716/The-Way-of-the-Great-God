@@ -1,0 +1,10 @@
+register||{"username":"huxiaofang${unique_num1}","password":"hxf950716","email": "hxf950716@qq.com"}||"code": "00"||userid----userid": (\w+)||post
+login||{"username":"huxiaofang${num1}","password":"${md5('hxf950716')}"}||"token"||token----"token": "(\w+)"||post
+create||{"userid":"%{userid}", "token": "%{token}", "title":"python_test1", "content":"python port test1"}||"code": "00"||None||post
+create||{"userid":"%{userid}", "token": "%{token}", "title":"python_test2", "content":"python port test2"}||"code": "00"||None||post
+getBlogsOfUser||{"userid":%{userid},"token":"%{token}"}||"code": "00"||articleId1----articleId": (\d+), "owner": \d+, "title": "python_test1"||post
+getBlogsOfUser||{"userid":%{userid},"token":"%{token}"}||"code": "00"||articleId2----articleId": (\d+), "owner": \d+, "title": "python_test2"||post
+update||{"userid":%{userid}, "token":"%{token}", "articleId":%{articleId1}, "title":"python_test1_update", "content":"python port test1_update"}|| "code": "00"||None||put
+getBlogContent||%{articleId1}||"title": "python_test1_update"||None||get
+getBlogsContent||%{articleId1},%{articleId2}||"code": "00"||None||get
+delete||{"userid":%{userid}, "token": "%{token}", "articleId":[%{articleId1},%{articleId2}]}||"code": "00||None||post
